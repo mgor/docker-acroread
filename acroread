@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+main() {
+    local document="${1}"
+    local file
+
+    if [[ -z "${document}" ]]; then
+        document="${HOME}/Documents"
+    else
+        document="$(readlink -f "${1}")"
+        if [[ -f "${document}" ]]; then
+            file="/home/acroread/Documents/$(basename "${document}")"
+            document="$(dirname "${document}")"
+        fi
+    fi
+
+    docker run --rm -v "${document}:/home/acroread/Documents:rw" \
+		-v /tmp/.X11-unix:/tmp/.X11-unix \
+		-v /var/run/cups:/var/run/cups:ro \
+		-e uid=$(id -u) \
+		-e gid=$(id -g) \
+		-e DISPLAY=unix$DISPLAY \
+		-e DOCKER_BRIDGE_IP=$(ifconfig docker0 | awk '/^[ ]+inet / {print $2}') \
+		-e FILE="${file}" \
+		--name acroread \
+		mgor/acroread >& /dev/null
+
+	return $?
+}
+
+main "$@"
+exit $?
