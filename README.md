@@ -1,7 +1,7 @@
 # Adobe Acrobat (acroread)
 
 Unofficial build of Adobe Acrobat 9.5.5 running within a docker container and
-rendered by the local X Server. Based on [chrisdaish/acroread](https://github.com/chrisdaish/acroread)
+rendered by the local X Server. Based on [chrisdaish/acroread](https://github.com/chrisdaish/docker-acroread)
 with the following changes:
 + By running this image, you have accepted the EULA automatically
 + /etc/cups/client.conf is automagically created if variable `DOCKER_BRIDGE_IP` is set
