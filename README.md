@@ -2,9 +2,9 @@
 
 Unofficial build of Adobe Acrobat 9.5.5 running within a docker container and
 rendered by the local X Server. Based on [chrisdaish/acroread](https://github.com/chrisdaish/docker-acroread)
-with the following changes:
-+ By running this image, you have accepted the EULA automatically
-+ /etc/cups/client.conf is automagically created if variable `DOCKER_BRIDGE_IP` is set
+but with a different approach when it comes to configuration files. By running this image *you* have accepted
+Adobes EULA for Acrobat Reader. It is also possible to enable `cups` by setting environment variable `DOCKER_BRIDGE_IP`
+to the IP address of `docker0` bridge on the host.
 
 ## Wrapper script
 
