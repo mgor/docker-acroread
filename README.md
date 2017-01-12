@@ -12,7 +12,7 @@ to the IP address of `docker0` bridge on the host.
 sudo cp acroread /usr/local/bin
 ```
 
-### Application launcher
+## Application launcher
 
 Install the application launcher:
 
