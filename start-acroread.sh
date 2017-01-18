@@ -24,7 +24,7 @@ cat > /home/acroread/.adobe/Acrobat/9.0/Preferences/reader_prefs <<EOF
 >>
 EOF
 
-if [[ -n "${DOCKER_BRIDGE_IP}" ]]; then
+if [[ -n "${CUPS_SERVER}" ]]; then
 	mkdir -p /etc/cups/ 2>/dev/null
     cat > /etc/cups/client.conf <<EOF
 # The ServerName directive specifies sets the remote server
@@ -33,7 +33,7 @@ if [[ -n "${DOCKER_BRIDGE_IP}" ]]; then
 # default port number is 631 but can be overridden by adding
 # a colon followed by the desired port number to the value.
 # The default is to use the local server ("localhost").
-ServerName ${DOCKER_BRIDGE_IP}
+ServerName ${CUPS_SERVER}
 EOF
 fi
 

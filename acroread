@@ -19,7 +19,7 @@ main() {
 		-e uid=$(id -u) \
 		-e gid=$(id -g) \
 		-e DISPLAY=unix$DISPLAY \
-		-e DOCKER_BRIDGE_IP=$(ifconfig docker0 | awk '/^[ ]+inet / {print $2}') \
+		-e CUPS_SERVER=$(ifconfig docker0 | awk '/^[ ]+inet / {print $2}') \
 		-e FILE="${file}" \
 		--name acroread \
 		mgor/acroread >& /dev/null
