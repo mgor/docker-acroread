@@ -6,13 +6,21 @@ but with a different approach when it comes to configuration files. By running t
 Adobes EULA for Acrobat Reader. It is also possible to enable `cups` by setting environment variable `CUPS_SERVER`
 to the IP address of `docker0` bridge on the host (this is done in `acroread` wrapper script).
 
-## Wrapper script
+## Image
+
+Before running the wrapper script for the first time, `pull` the latest image:
+
+```
+docker pull mgor/acroread
+```
+
+## Wrapper
 
 ```
 sudo cp acroread /usr/local/bin
 ```
 
-## Application launcher
+## Application
 
 Install the application launcher:
 
