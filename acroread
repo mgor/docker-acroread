@@ -2,6 +2,7 @@
 main() {
     local document="${1}"
     local file
+    local ipaddr
 
     if [[ -z "${document}" ]]; then
         document="${HOME}/Documents"
@@ -13,13 +14,19 @@ main() {
         fi
     fi
 
+    if [[ $(type -p "ifconfig") ]]; then
+        ipaddr="ifconfig"
+    else
+        ipaddr="ip addr show dev"
+    fi
+
     docker run --rm -v "${document}:/home/acroread/Documents:rw" \
 		-v /tmp/.X11-unix:/tmp/.X11-unix \
 		-v /var/run/cups:/var/run/cups:ro \
 		-e uid="$(id -u)" \
 		-e gid="$(id -g)" \
 		-e DISPLAY="unix${DISPLAY}" \
-		-e CUPS_SERVER="$(ifconfig docker0 | awk '/^[ ]+inet / {print $2}')" \
+		-e CUPS_SERVER="$(${ipaddr} docker0 | awk '/^[ ]+inet / {print $2}')" \
 		-e FILE="${file}" \
 		--name acroread \
 		mgor/acroread >& /dev/null
